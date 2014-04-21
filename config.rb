@@ -35,17 +35,8 @@
 # Automatic image dimensions on image_tag helper
 # activate :automatic_image_sizes
 
-# Reload the browser automatically whenever files change
-# configure :development do
-#   activate :livereload
-# end
+activate :directory_indexes
 
-# Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
 
 helpers do
 
@@ -58,6 +49,13 @@ helpers do
   def last_event
     @last_event ||= events.last
   end
+
+  def companies
+    @companies ||= YAML.load_file('data/companies.yml').map do |company|
+      Hashie::Mash.new(company)
+    end
+  end
+
 end
 
 
